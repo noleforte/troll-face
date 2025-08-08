@@ -1,3 +1,18 @@
+function randomFallback() {
+  const fallbacks = [
+    "Skill issue. Try again later.",
+    "Cope + seethe.",
+    "Try turning it off and on again.",
+    "Wow, even I can't help you with that.",
+    "Did you even try googling it?",
+    "Bro, that's a new low.",
+    "Ask a better question next time.",
+    "You really thought that would work?",
+    "2010 called, they want their meme back."
+  ];
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -48,9 +63,13 @@ Trollface: Wow, you really asked that? Next you'll ask why water is wet. Cope + 
     });
     const data = await response.json();
     console.log('OpenAI response:', JSON.stringify(data));
-    res.status(200).json({ reply: data.choices?.[0]?.message?.content?.trim() || "U mad bro?" });
+    let reply = data.choices?.[0]?.message?.content?.trim();
+    if (!reply || reply.length < 3) {
+      reply = randomFallback();
+    }
+    res.status(200).json({ reply });
   } catch (err) {
     console.error('OpenAI error:', err);
-    res.status(500).json({ reply: "Skill issue. Try again later." });
+    res.status(500).json({ reply: randomFallback() });
   }
 } 

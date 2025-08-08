@@ -7,11 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <section id="banner">
+        <h1 style="font-size:2.5em; text-align:center; margin: 0; letter-spacing: 2px;">Trollface Chatbot</h1>
+        <p style="text-align:center; font-size:1.2em; margin-top: 8px; color: #ff0; text-shadow: 1px 1px 2px #000;">The ultimate meme AI for trolling your questions</p>
+    </section>
+    <section id="about" style="max-width:700px; margin: 32px auto 0 auto; background:#232323; border-radius:12px; border:2px solid #fff; padding:24px 20px 18px 20px; box-shadow:0 0 12px #000a;">
+        <h2 style="margin-top:0; color:#ff0;">About</h2>
+        <p style="font-size:1.1em; color:#fff;">Trollface Chatbot is an AI with the classic 2010-era meme troll energy. It’s sarcastic, playful, and always ready to roast you with a smile. Ask anything — but be ready for a mischievous answer!<br><br><b>Features:</b></p>
+        <ul style="color:#fff; font-size:1em; margin-left:1.2em;">
+            <li>Chaotic-neutral meme personality</li>
+            <li>Classic troll phrases and roasts</li>
+            <li>Powered by OpenAI</li>
+            <li>Modern, meme-inspired chat UI</li>
+        </ul>
+    </section>
     <section id="chat">
-        <div id="chat-window" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #222; color: #fff; font-family: monospace; margin-bottom: 10px;"></div>
-        <form id="chat-form" style="display: flex; gap: 8px;">
-            <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #888;" />
-            <button type="submit" style="padding: 8px 16px; border-radius: 4px; background: #444; color: #fff; border: none; cursor: pointer;">Send</button>
+        <div id="chat-window"></div>
+        <form id="chat-form">
+            <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" />
+            <button type="submit">Send</button>
         </form>
     </section>
     <script src="chat.js"></script>

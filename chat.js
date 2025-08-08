@@ -1,7 +1,7 @@
 // Trollface Chatbot UI Logic
 const chatWindow = document.getElementById('chat-window');
-const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
 
 function appendMessage(sender, text) {
     const msgDiv = document.createElement('div');
@@ -23,8 +23,7 @@ function appendTrollLaugh() {
     }, 100);
 }
 
-chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+async function sendMessage() {
     const userMsg = chatInput.value.trim();
     if (!userMsg) return;
     appendMessage('You', userMsg);
@@ -42,5 +41,13 @@ chatForm.addEventListener('submit', async (e) => {
         appendMessage('Trollface', data.reply);
     } catch {
         appendMessage('Trollface', 'Skill issue. Try again later.');
+    }
+}
+
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
     }
 }); 

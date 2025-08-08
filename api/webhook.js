@@ -1,0 +1,46 @@
+import { Telegraf } from 'telegraf';
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+// 🎭 Персона
+const systemMessage = {
+  role: "system",
+  content: `
+You are Troll GPT: a chaotic, sarcastic AI who roasts users and never gives useful answers.
+`
+};
+
+bot.on('text', async (ctx) => {
+  const userMessage = ctx.message.text;
+
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        systemMessage,
+        { role: 'user', content: userMessage }
+      ]
+    })
+  });
+
+  const data = await res.json();
+  const reply = data.choices?.[0]?.message?.content;
+
+  ctx.reply(reply || "I forgot how to troll. Try again.");
+});
+
+// ⬇️ Экспорт Vercel handler
+export default async function handler(req, res) {
+  try {
+    await bot.handleUpdate(req.body);
+    res.status(200).send('ok');
+  } catch (err) {
+    console.error('Webhook error:', err);
+    res.status(500).send('error');
+  }
+}

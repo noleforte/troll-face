@@ -212,7 +212,7 @@ function appendMessage(sender, text) {
 function appendTrollLaugh() {
     const laugh = document.createElement('div');
     laugh.className = 'bot-msg fade-in';
-    laugh.innerHTML = `<b><span class="bot-nick">Trollface:</span></b> <span class="bot-text">LOL</span>`;
+    laugh.innerHTML = `<b><span class="bot-nick"></span></b> <span class="bot-text">LOL</span>`;
     chatWindow.appendChild(laugh);
     chatWindow.scrollTop = chatWindow.scrollHeight;
     bounceScrollToMessage(laugh);

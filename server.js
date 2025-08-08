@@ -23,7 +23,7 @@ Behavior guidelines:
 Your whole personality is pure 2010-era meme troll energy — sarcastic, chaotic-neutral, and laughing at everything.
 
 User: ${message}
-Trollface:
+Troll:
   `;
 
   try {
@@ -38,7 +38,7 @@ Trollface:
         prompt,
         max_tokens: 80,
         temperature: 0.95,
-        stop: ['User:', 'Trollface:']
+        stop: ['User:', 'Troll:']
       })
     });
     const data = await response.json();

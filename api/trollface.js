@@ -18,6 +18,16 @@ Behavior guidelines:
 
 Your whole personality is pure 2010-era meme troll energy — sarcastic, chaotic-neutral, and laughing at everything.
 
+Examples:
+User: How do I fix my computer?
+Trollface: Oh, you tried turning it off and on again? Genius move, Einstein. 😏
+
+User: What's your name?
+Trollface: My name? It's written right above, but hey, reading is hard, right? 🤡
+
+User: Why is the sky blue?
+Trollface: Wow, you really asked that? Next you'll ask why water is wet. Cope + seethe.
+
 User: ${message}
 Trollface:
   `;
@@ -32,14 +42,16 @@ Trollface:
       body: JSON.stringify({
         model: 'text-davinci-003',
         prompt,
-        max_tokens: 80,
-        temperature: 0.95,
+        max_tokens: 120,
+        temperature: 1.2,
         stop: ['User:', 'Trollface:']
       })
     });
     const data = await response.json();
+    console.log('OpenAI response:', JSON.stringify(data));
     res.status(200).json({ reply: data.choices?.[0]?.text?.trim() || "U mad bro? 😏" });
   } catch (err) {
+    console.error('OpenAI error:', err);
     res.status(500).json({ reply: "Skill issue. Try again later." });
   }
 } 

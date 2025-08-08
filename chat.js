@@ -13,7 +13,7 @@ function appendMessage(sender, text) {
 
 function appendTrollLaugh() {
     const laugh = document.createElement('div');
-    laugh.innerHTML = `<b>Trollface:</b> LOL 🤡🤣`;
+    laugh.innerHTML = `<b>Trollface:</b> LOL`;
     laugh.style.opacity = 0;
     laugh.style.transition = 'opacity 0.5s';
     chatWindow.appendChild(laugh);
@@ -21,11 +21,6 @@ function appendTrollLaugh() {
         laugh.style.opacity = 1;
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }, 100);
-}
-
-function trollMood() {
-    const moods = ['😏', '😈', '😂', '🤡', '🧠'];
-    return moods[Math.floor(Math.random() * moods.length)];
 }
 
 chatForm.addEventListener('submit', async (e) => {
@@ -44,8 +39,8 @@ chatForm.addEventListener('submit', async (e) => {
             body: JSON.stringify({ message: userMsg })
         });
         const data = await res.json();
-        appendMessage('Trollface', `${trollMood()} ${data.reply}`);
+        appendMessage('Trollface', data.reply);
     } catch {
-        appendMessage('Trollface', `${trollMood()} Skill issue. Try again later.`);
+        appendMessage('Trollface', 'Skill issue. Try again later.');
     }
 }); 

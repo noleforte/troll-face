@@ -3,31 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Troll-face</title>
+    <title>Troll GPT</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <section id="banner">
-        <h1>Trollface Chatbot</h1>
+        <h1 class="troll-title">
+            <span>Troll GPT</span>
+        </h1>
         <p>The ultimate meme AI for trolling your questions</p>
     </section>
-    <section id="about">
-        <h2>About</h2>
-        <p>Trollface Chatbot is an AI with the classic 2010-era meme troll energy. It’s sarcastic, playful, and always ready to roast you with a smile. Ask anything — but be ready for a mischievous answer!</p>
-        <ul>
-            <li>Chaotic-neutral meme personality</li>
-            <li>Classic troll phrases and roasts</li>
-            <li>Powered by OpenAI</li>
-            <li>Minimalist chat UI</li>
-        </ul>
-    </section>
+    <div id="about-flex">
+        <section id="chat-about">
+            <h2>About</h2>
+            <p><b>Who the hell is Troll GPT?</b><br>
+            Troll GPT isn’t your friend. It’s not your therapist.<br>
+            It’s a sarcastic, chaotic, 2010-core meme gremlin injected with OpenAI’s brain.<br>
+            Ask it anything — and it’ll roast you for even thinking about it.<br>
+            You wanted answers? Too bad. You’re getting attitude.</p>
+            <p>Proceed with caution. Or don’t. It’ll mock you either way.</p>
+        </section>
+        <section id="chat-what">
+            <h2>What can it do? <span style="font-weight:400; font-size:0.8em; color:#bbb;">(Besides hurt your feelings)</span></h2>
+            <ul>
+                <li>Clap back in 0.2 seconds</li>
+                <li>Quote memes that died before you were born</li>
+                <li>Misinterpret your questions on purpose</li>
+                <li>Summon roast sessions with a single keystroke</li>
+            </ul>
+            <p>It doesn’t help — it heckles.<br>
+            It doesn’t answer — it insults.<br>
+            It doesn’t care — it laughs.</p>
+            <p style="margin-top:18px;"><b>You don’t use Troll GPT.<br> You survive it.</b></p>
+        </section>
+    </div>
     <section id="chat">
         <div id="chat-window"></div>
-        <div style="width:100%; display:flex; gap:8px; margin-top:8px;">
+        <div style="width:100%; display:flex; gap:10px; margin-top:12px;">
             <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" style="flex:1;" />
             <button id="chat-send" type="button">Send</button>
         </div>
     </section>
+    <div id="rage-overlay"></div>
     <script src="chat.js"></script>
 </body>
 </html>

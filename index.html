@@ -7,44 +7,134 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section id="banner">
-        <h1 class="troll-title">
-            <span>Troll GPT</span>
-        </h1>
-        <p>The ultimate meme AI for trolling your questions</p>
-    </section>
-    <div id="about-flex">
-        <section id="chat-about">
-            <h2>About</h2>
-            <p><b>Who the hell is Troll GPT?</b><br>
-            Troll GPT isn’t your friend. It’s not your therapist.<br>
-            It’s a sarcastic, chaotic, 2010-core meme gremlin injected with OpenAI’s brain.<br>
-            Ask it anything — and it’ll roast you for even thinking about it.<br>
-            You wanted answers? Too bad. You’re getting attitude.</p>
-            <p>Proceed with caution. Or don’t. It’ll mock you either way.</p>
+    <div id="layout">
+        <div class="burger-button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="sidebar-overlay"></div>
+        <section id="sidebar-section">
+            <aside id="sidebar">
+                <div class="sidebar-header">Troll GPT</div>
+                <nav>
+                    <ul>
+                        <li class="active" data-section="chat">Chat</li>
+                        <li data-section="about">About</li>
+                        <li data-section="what">What can it do?</li>
+                    </ul>
+                </nav>
+            </aside>
         </section>
-        <section id="chat-what">
-            <h2>What can it do? <span style="font-weight:400; font-size:0.8em; color:#bbb;">(Besides hurt your feelings)</span></h2>
-            <ul>
-                <li>Clap back in 0.2 seconds</li>
-                <li>Quote memes that died before you were born</li>
-                <li>Misinterpret your questions on purpose</li>
-                <li>Summon roast sessions with a single keystroke</li>
-            </ul>
-            <p>It doesn’t help — it heckles.<br>
-            It doesn’t answer — it insults.<br>
-            It doesn’t care — it laughs.</p>
-            <p style="margin-top:18px;"><b>You don’t use Troll GPT.<br> Troll GPT uses you.</b></p>
+        <section id="main-section">
+            <main id="main">
+                <header>
+                    <h1>Troll GPT</h1>
+                    <p>The ultimate meme AI for trolling your questions</p>
+                </header>
+                <section id="chat-section">
+                    <div id="chat-empty" class="chat-empty">
+                      <div class="chat-empty-title">Be brave and try to troll me</div>
+                      <div class="chat-empty-input-row">
+                        <input id="chat-input-empty" type="text" placeholder="Ask anything" autocomplete="off" />
+                        <button id="chat-send-empty" type="button">Send</button>
+                      </div>
+                    </div>
+                    <div id="chat-window" style="display:none"></div>
+                    <div class="chat-input-row" style="display:none">
+                        <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" />
+                        <button id="chat-send" type="button" aria-label="Send prompt" data-testid="send-button" class="composer-submit-btn">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                <path d="M8.99992 16V6.41407L5.70696 9.70704C5.31643 10.0976 4.68342 10.0976 4.29289 9.70704C3.90237 9.31652 3.90237 8.6835 4.29289 8.29298L9.29289 3.29298L9.36907 3.22462C9.76184 2.90427 10.3408 2.92686 10.707 3.29298L15.707 8.29298L15.7753 8.36915C16.0957 8.76192 16.0731 9.34092 15.707 9.70704C15.3408 10.0732 14.7618 10.0958 14.3691 9.7754L14.2929 9.70704L10.9999 6.41407V16C10.9999 16.5523 10.5522 17 9.99992 17C9.44764 17 8.99992 16.5523 8.99992 16Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </section>
+                <section id="about-section" style="display:none;">
+                    <h2>About</h2>
+                    <p><b>Who the hell is Troll GPT?</b><br>
+                    Troll GPT isn't your friend. It's not your therapist.<br>
+                    It's a sarcastic, chaotic, 2010-core meme gremlin injected with OpenAI's brain.<br>
+                    Ask it anything — and it'll roast you for even thinking about it.<br>
+                    You wanted answers? Too bad. You're getting attitude.</p>
+                    <p>Proceed with caution. Or don't. It'll mock you either way.</p>
+                </section>
+                <section id="what-section" style="display:none;">
+                    <h2>What can it do? <span style="font-weight:400; font-size:0.8em; color:#bbb;">(Besides hurt your feelings)</span></h2>
+                    <ul>
+                        <li>Clap back in 0.2 seconds</li>
+                        <li>Quote memes that died before you were born</li>
+                        <li>Misinterpret your questions on purpose</li>
+                        <li>Summon roast sessions with a single keystroke</li>
+                    </ul>
+                    <p>It doesn't help — it heckles.<br>
+                    It doesn't answer — it insults.<br>
+                    It doesn't care — it laughs.</p>
+                    <p style="margin-top:18px;"><b>You don't use Troll GPT.<br> Troll GPT uses you.</b></p>
+                </section>
+            </main>
+        </section>
+        <section id="bottom-panel-section">
+            <aside id="bottom-panel">
+                <div class="bottom-panel-header">Status</div>
+                <nav>
+                    <ul>
+                        <li>Troll GPT is ready to roast</li>
+                        <li>Connected to OpenAI</li>
+                        <li>Version 1.0</li>
+                    </ul>
+                </nav>
+            </aside>
         </section>
     </div>
-    <section id="chat">
-        <div id="chat-window"></div>
-        <div style="width:100%; display:flex; gap:10px; margin-top:12px;">
-            <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" style="flex:1;" />
-            <button id="chat-send" type="button">Send</button>
-        </div>
-    </section>
     <div id="rage-overlay"></div>
     <script src="chat.js"></script>
+    <script>
+    // Навигация по секциям
+    document.querySelectorAll('#sidebar nav li').forEach(li => {
+      li.onclick = function() {
+        document.querySelectorAll('#sidebar nav li').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('chat-section').style.display = this.dataset.section === 'chat' ? '' : 'none';
+        document.getElementById('about-section').style.display = this.dataset.section === 'about' ? '' : 'none';
+        document.getElementById('what-section').style.display = this.dataset.section === 'what' ? '' : 'none';
+        // Навешиваем обработчики при переключении на чат
+        if (this.dataset.section === 'chat') {
+          bindMainChatInputHandlers();
+        }
+        // Закрываем sidebar на мобильных
+        if (window.innerWidth <= 900) {
+          closeSidebar();
+        }
+      };
+    });
+
+    // Burger menu для мобильных
+    const burgerButton = document.querySelector('.burger-button');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      burgerButton.classList.add('active');
+      overlay.classList.add('active');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      burgerButton.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+
+    burgerButton.addEventListener('click', () => {
+      if (sidebar.classList.contains('active')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+    </script>
 </body>
 </html> 

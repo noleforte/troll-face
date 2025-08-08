@@ -1,6 +1,6 @@
 // Trollface Chatbot UI Logic
 const chatWindow = document.getElementById('chat-window');
-const chatSection = document.getElementById('chat');
+const chatSection = document.getElementById('chat-section');
 const chatInput = document.getElementById('chat-input');
 const chatSend = document.getElementById('chat-send');
 
@@ -25,21 +25,68 @@ function loadChatHistory() {
     const history = localStorage.getItem('trollChatHistory');
     if (history) {
         const messages = JSON.parse(history);
-        messages.forEach(html => {
-            const msgDiv = document.createElement('div');
-            msgDiv.innerHTML = html;
-            // Определяем класс по содержимому
-            if (html.startsWith('<b>You:')) {
-                msgDiv.className = 'you-msg fade-in';
-            } else {
-                msgDiv.className = 'bot-msg fade-in';
-            }
-            chatWindow.appendChild(msgDiv);
-        });
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-        // Спец. приветствие
-        setTimeout(() => appendMessage('Trollface', 'You really came back? I thought I roasted you into oblivion.'), 400);
+        if (messages.length > 0) {
+            // Если есть история - сразу показываем основной чат
+            showMainChat();
+            messages.forEach(html => {
+                const msgDiv = document.createElement('div');
+                msgDiv.innerHTML = html;
+                // Определяем класс по содержимому
+                if (html.startsWith('<b>You:')) {
+                    msgDiv.className = 'you-msg fade-in';
+                } else {
+                    msgDiv.className = 'bot-msg fade-in';
+                }
+                chatWindow.appendChild(msgDiv);
+            });
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            // Спец. приветствие
+            setTimeout(() => appendMessage('Trollface', 'You really came back? I thought I roasted you into oblivion.'), 400);
+        } else {
+            // Если истории нет - показываем пустое состояние
+            updateChatEmptyState();
+        }
+    } else {
+        // Если истории нет - показываем пустое состояние
+        updateChatEmptyState();
     }
+}
+
+function updateChatEmptyState() {
+  const chatWindow = document.getElementById('chat-window');
+  const emptyDiv = document.getElementById('chat-empty');
+  // Считаем только сообщения в chat-window
+  const hasMessages = Array.from(chatWindow.children).some(
+    el => el.nodeType === 1 && (el.classList.contains('you-msg') || el.classList.contains('bot-msg'))
+  );
+  // Показываем chat-empty только если нет сообщений
+  if (emptyDiv) {
+    emptyDiv.style.display = hasMessages ? 'none' : '';
+  }
+}
+
+function bindMainChatInputHandlers() {
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+  if (chatInput && !chatInput.dataset.bound) {
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+    chatInput.dataset.bound = 'true';
+  }
+}
+
+function showMainChat() {
+  document.getElementById('chat-empty').style.display = 'none';
+  document.getElementById('chat-window').style.display = '';
+  document.querySelector('.chat-input-row').style.display = '';
+
+  // Навешиваем обработчики только после появления элементов
+  bindMainChatInputHandlers();
 }
 
 // Анимация загрузки при заходе на сайт
@@ -93,20 +140,27 @@ window.addEventListener('DOMContentLoaded', () => {
         loadChatHistory();
     }, 6000);
 
-    // Collapsible About
-    const aboutToggle = document.getElementById('about-toggle');
-    const aboutContent = document.getElementById('about-content');
-    if (aboutToggle && aboutContent) {
-        aboutToggle.addEventListener('click', () => {
-            const expanded = aboutToggle.getAttribute('aria-expanded') === 'true';
-            aboutToggle.setAttribute('aria-expanded', String(!expanded));
-            if (!expanded) {
-                aboutContent.classList.add('open');
-            } else {
-                aboutContent.classList.remove('open');
-            }
-        });
+    // Логика для стартового поля ввода
+    const chatInputEmpty = document.getElementById('chat-input-empty');
+    const chatSendEmpty = document.getElementById('chat-send-empty');
+    function sendFirstMessage() {
+      const value = chatInputEmpty.value.trim();
+      if (!value) return;
+      showMainChat();
+      document.getElementById('chat-input').value = value;
+      appendMessage('You', value);
+      chatInputEmpty.value = '';
     }
+    chatSendEmpty.addEventListener('click', sendFirstMessage);
+    chatInputEmpty.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendFirstMessage();
+      }
+    });
+
+    // Удаляю блок Collapsible About (about-toggle/about-content), чтобы не было ошибок обращения к несуществующим элементам.
+    updateChatEmptyState();
 });
 
 function trollBotEffects() {
@@ -152,6 +206,7 @@ function appendMessage(sender, text) {
     bounceScrollToMessage(msgDiv);
     if (!isUser) trollBotEffects();
     saveChatHistory();
+    updateChatEmptyState();
 }
 
 function appendTrollLaugh() {
@@ -163,6 +218,7 @@ function appendTrollLaugh() {
     bounceScrollToMessage(laugh);
     trollBotEffects();
     saveChatHistory();
+    updateChatEmptyState();
 }
 
 async function sendMessage() {
@@ -184,12 +240,4 @@ async function sendMessage() {
     } catch {
         appendMessage('Trollface', 'Skill issue. Try again later.');
     }
-}
-
-chatSend.addEventListener('click', sendMessage);
-chatInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        sendMessage();
-    }
-}); 
+} 

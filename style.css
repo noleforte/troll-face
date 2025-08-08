@@ -388,7 +388,7 @@ body {
 #about-flex {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 60px;
   justify-content: center;
   align-items: flex-start;
   margin-top: 48px;
@@ -401,9 +401,9 @@ body {
   box-shadow: 0 4px 32px #000a;
   border: 1.5px solid #333;
   padding: 40px 56px 36px 56px;
-  max-width: 420px;
+  max-width: 520px;
   min-width: 320px;
-  flex: 1 1 320px;
+  flex: 1 1 340px;
   margin: 0;
   transition: box-shadow 0.3s, background 0.3s;
 }
@@ -445,12 +445,40 @@ body {
 @media (max-width: 1000px) {
   #about-flex {
     flex-direction: column;
-    gap: 28px;
+    gap: 24px;
     align-items: center;
+    max-width: 98vw;
   }
   #chat-about, #chat-what {
     max-width: 98vw;
     min-width: 0;
-    padding: 28px 8vw 24px 8vw;
+    padding: 24px 4vw 18px 4vw;
+  }
+}
+@media (max-width: 2560px) and (min-width: 1440px) {
+  #about-flex {
+    gap: 120px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #chat-about, #chat-what {
+    max-width: 600px;
+    min-width: 340px;
+    padding: 48px 60px 40px 60px;
+    font-size: 1.18em;
+  }
+  #chat {
+    margin-top: 355px !important;
+    max-width: 1400px;
+}
+}
+@media (max-width: 1440px) {
+  #main-flex {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
   }
 }

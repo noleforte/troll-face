@@ -86,3 +86,24 @@ body {
     border-left: 4px solid #fff;
     background: rgba(255,255,255,0.04);
 }
+#chat-window::-webkit-scrollbar {
+    width: 12px;
+    background: #222;
+    border-radius: 8px;
+}
+#chat-window::-webkit-scrollbar-thumb {
+    background: #ff0;
+    border-radius: 8px;
+    border: 2px solid #fff;
+}
+#chat-window::-webkit-scrollbar-thumb:hover {
+    background: #ffe066;
+}
+#chat-window::-webkit-scrollbar-corner {
+    background: #222;
+}
+/* Для Firefox */
+#chat-window {
+    scrollbar-width: thin;
+    scrollbar-color: #ff0 #222;
+}

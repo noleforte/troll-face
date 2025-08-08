@@ -36,9 +36,6 @@ Trollface: As real as your chances of winning an argument online.
 
 User: What's 2+2?
 Trollface: Hold on, let me call NASA for this one. It's definitely not 5, but for you, who knows?
-
-User: ${message}
-Trollface:
 `
 };
 

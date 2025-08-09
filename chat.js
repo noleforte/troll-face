@@ -32,10 +32,10 @@ function loadChatHistory() {
                 const msgDiv = document.createElement('div');
                 msgDiv.innerHTML = html;
                 // Определяем класс по содержимому
-                if (html.startsWith('<b>You:')) {
-                    msgDiv.className = 'you-msg fade-in';
-                } else {
+                if (html.includes('bot-nick') || html.includes('bot-text')) {
                     msgDiv.className = 'bot-msg fade-in';
+                } else {
+                    msgDiv.className = 'you-msg fade-in';
                 }
                 chatWindow.appendChild(msgDiv);
             });
@@ -196,10 +196,10 @@ function appendMessage(sender, text) {
     let isUser = sender === 'You';
     if (isUser) {
         msgDiv.className = 'you-msg fade-in';
-        msgDiv.innerHTML = `<b>${sender}:</b> ${text}`;
+        msgDiv.innerHTML = text;
     } else {
         msgDiv.className = 'bot-msg fade-in';
-        msgDiv.innerHTML = `<b><span class="bot-nick">${sender}:</span></b> <span class="bot-text">${text}</span>`;
+        msgDiv.innerHTML = `<span class="bot-text">${text}</span>`;
     }
     chatWindow.appendChild(msgDiv);
     chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -212,7 +212,7 @@ function appendMessage(sender, text) {
 function appendTrollLaugh() {
     const laugh = document.createElement('div');
     laugh.className = 'bot-msg fade-in';
-    laugh.innerHTML = `<b><span class="bot-nick"></span></b> <span class="bot-text">LOL</span>`;
+    laugh.innerHTML = `<span class="bot-text">LOL</span>`;
     chatWindow.appendChild(laugh);
     chatWindow.scrollTop = chatWindow.scrollHeight;
     bounceScrollToMessage(laugh);

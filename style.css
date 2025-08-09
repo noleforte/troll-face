@@ -108,9 +108,6 @@ body {
   justify-content: center;
   text-decoration: none;
 }
-.nav-btn:hover {
-  background: #333;
-}
 .nav-btn img {
   max-width: 100%;
   height: 88%;
